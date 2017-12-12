@@ -1,0 +1,31 @@
+<style lang="less">
+</style>
+<template>
+  <view class="article-wpy">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Article extends wepy.page {
+    config = {
+      navigationBarTitleText: '文章'
+    }
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>

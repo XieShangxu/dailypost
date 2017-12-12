@@ -1,0 +1,109 @@
+<style lang="less">
+page {
+  height: 100%;
+}
+.container {
+  display: flex;
+  flex-flow: wrap row;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 10rpx;
+  background: #f5f5f5;
+  .item {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    box-sizing: border-box;
+    .item-content {
+      position: absolute;
+      top: 10rpx;
+      right: 10rpx;
+      bottom: 10rpx;
+      left: 10rpx;
+      border-radius: 15rpx;
+      text-align: center;
+      background: #fff;
+    }
+    .content-detail {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+    }
+    image {
+      width: 100rpx;
+      height: 100rpx;
+    }
+    .title {
+      display: block;
+      margin-top: 30rpx;
+    }
+  }
+}
+</style>
+<template>
+  <view class="container">
+    <repeat for="{{navs}}" item="item" key="index" index="index">
+      <view class="item" data-key="{{item.key}}" @tap="gotoPage">
+        <view class="item-content">
+          <view class="content-detail">
+            <image src="{{item.imgUrl}}" />
+            <text class="title">{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '前端日日谈'
+    }
+
+    data = {
+      navs: [{
+        key: 'article',
+        name: '文章一篇',
+        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/article.svg'
+      }, {
+        key: 'resource',
+        name: '资源一筐',
+        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/resource.svg'
+      }, {
+        key: 'code',
+        name: '代码一行',
+        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/code.svg'
+      }, {
+        key: 'interview',
+        name: '面试一打',
+        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/interview.svg'
+      }]
+    }
+
+    computed = {
+    }
+
+    methods = {
+      gotoPage(e) {
+        const key = e.currentTarget.dataset.key;
+        wepy.navigateTo({
+          url: key
+        })
+      }
+    }
+
+    events = {
+    }
+
+    onLoad() {
+      this.$parent.getUserInfo()
+    }
+  }
+</script>

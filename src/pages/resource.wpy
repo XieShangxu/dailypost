@@ -1,0 +1,31 @@
+<style lang="less">
+</style>
+<template>
+  <view class="resource-wpy">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Resource extends wepy.page {
+    config = {
+      navigationBarTitleText: '资源'
+    }
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>

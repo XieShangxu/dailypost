@@ -1,0 +1,31 @@
+<style lang="less">
+</style>
+<template>
+  <view class="interview-wpy">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Interview extends wepy.page {
+    config = {
+      navigationBarTitleText: '面试'
+    }
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>

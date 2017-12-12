@@ -1,0 +1,31 @@
+<style lang="less">
+</style>
+<template>
+  <view class="code-wpy">
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Code extends wepy.page {
+    config = {
+      navigationBarTitleText: '代码'
+    }
+
+    data = {
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onLoad() {
+    }
+  }
+</script>
