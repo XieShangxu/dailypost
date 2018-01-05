@@ -1,0 +1,89 @@
+<style lang="less">
+.article-list-wpy {
+  padding: 20rpx;
+}
+.section-wrapper {
+  margin-bottom: 40rpx;
+}
+.section-header {
+  display: block;
+  margin-bottom: 20rpx;
+}
+.list-item {
+  margin-bottom: 20rpx;
+  padding: 20rpx;
+  border: 1rpx solid #e5e5e5;
+  border-radius: 10rpx;
+  background: #f5f5f5;
+  font-size: 32rpx;
+}
+</style>
+<template>
+  <view class="article-list-wpy">
+    <repeat for="{{articles}}" key="key" index="key" item="item">
+      <view class="section-wrapper">
+        <text class="section-header">{{key}}</text>
+        <repeat for="{{item}}" key="index" index="index" item="article">
+          <view class="list-item" style="border-left: 10rpx solid {{colorArr[index % 6]}}" data-id="{{article.uid}}" @tap="gotoDetail">
+            {{article.title}}
+          </view>
+        </repeat>
+      </view>
+    </repeat>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import constants from '../utils/constants.js'
+
+  export default class ArticleList extends wepy.page {
+    config = {
+      navigationBarTitleText: '往期文章'
+    }
+
+    data = {
+      colorArr: ['#A5CEDB', '#FAE674', '#D6563E', '#BE8198', '#CBDA65', '#6A645D'],
+      articles: []
+    }
+
+    computed = {
+    }
+
+    methods = {
+      gotoDetail(e) {
+        const id = e.currentTarget.dataset.id
+        wepy.navigateTo({
+          url: `articleDetail?id=${id}`
+        })
+      }
+    }
+
+    events = {
+    }
+
+    onLoad() {
+      const that = this
+      wepy.request({
+        url: `${constants.API_HOST}/api/articles`
+      }).then((resp) => {
+        if (resp.statusCode === 200) {
+          const data = resp.data
+          const formattedData = {}
+          for (const article of data) {
+            if (!formattedData[`${article.date} `]) {
+              formattedData[`${article.date} `] = []
+            }
+            formattedData[`${article.date} `].push(article)
+          }
+          that.articles = formattedData
+          that.$apply()
+        } else {
+          wepy.showToast({
+            title: resp.data.message
+          })
+        }
+      })
+    }
+  }
+</script>

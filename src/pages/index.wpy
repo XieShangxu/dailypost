@@ -92,7 +92,7 @@ page {
 
     methods = {
       gotoPage(e) {
-        const key = e.currentTarget.dataset.key;
+        const key = e.currentTarget.dataset.key
         wepy.navigateTo({
           url: key
         })

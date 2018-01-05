@@ -3,12 +3,15 @@
 
 <script>
 import wepy from 'wepy'
+import 'wepy-async-function'
 
 export default class extends wepy.app {
   config = {
     pages: [
       'pages/index',
       'pages/article',
+      'pages/articleList',
+      'pages/articleDetail',
       'pages/resource',
       'pages/interview',
       'pages/code'
@@ -22,11 +25,13 @@ export default class extends wepy.app {
   }
 
   globalData = {
-    userInfo: null
+    userInfo: null,
+    curArticle: {}
   }
 
   constructor () {
     super()
+    this.use('promisify')
     this.use('requestfix')
   }
 

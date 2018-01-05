@@ -1,0 +1,66 @@
+<style lang="less">
+.article-detail-wpy {
+  padding: 40rpx;
+}
+</style>
+<template>
+  <view class="article-detail-wpy">
+    <rich-text nodes="{{detail}}"></rich-text>
+  </view>
+</template>
+
+<script>
+  import wepy from 'wepy'
+  import constants from '../utils/constants.js'
+  import { parser } from '../utils/parser.js'
+
+  export default class Article extends wepy.page {
+    config = {
+      navigationBarTitleText: ''
+    }
+
+    data = {
+      title: '',
+      bg: '',
+      detail: ''
+    }
+
+    computed = {
+    }
+
+    methods = {
+    }
+
+    events = {
+    }
+
+    onShareAppMessage() {
+      return {
+        from: 'menu',
+        title: this.title,
+        imageUrl: this.bg
+      }
+    }
+
+    onLoad(options) {
+      const that = this
+      wepy.request({
+        url: `${constants.API_HOST}/api/articles/${options.id}`
+      }).then((resp) => {
+        if (resp.statusCode === 200) {
+          that.title = resp.data.title
+          that.bg = resp.data.bgUrl
+          wepy.setNavigationBarTitle({
+            title: resp.data.title
+          })
+          that.detail = parser(resp.data.content)
+          that.$apply()
+        } else {
+          wepy.showToast({
+            title: resp.data.message
+          })
+        }
+      })
+    }
+  }
+</script>
