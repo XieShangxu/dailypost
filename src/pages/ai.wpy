@@ -2,7 +2,7 @@
 page {
   height: 100%;
 }
-.article-wpy {
+.ai-wpy {
   height: 100%;
 }
 .swiper-wrapper {
@@ -57,7 +57,7 @@ page {
 }
 </style>
 <template>
-  <view class="article-wpy">
+  <view class="ai-wpy">
     <swiper wx:if="{{articles.length}}" class="swiper-wrapper" circular="{{circular}}" indicator-dots="{{indicatorDots}}">
       <repeat for="{{articles}}" key="index" index="index" item="item">
         <swiper-item class="swiper-item" data-id="{{item.uid}}" @tap="gotoDetail">
@@ -81,9 +81,9 @@ page {
   import wepy from 'wepy'
   import constants from '../utils/constants.js'
 
-  export default class Article extends wepy.page {
+  export default class AI extends wepy.page {
     config = {
-      navigationBarTitleText: '文章'
+      navigationBarTitleText: '人工智能'
     }
 
     data = {
@@ -104,7 +104,7 @@ page {
       },
       showHistory() {
         wepy.navigateTo({
-          url: 'articleList?type=daily'
+          url: 'articleList?type=ai'
         })
       }
     }
@@ -115,7 +115,7 @@ page {
     onLoad() {
       const that = this
       wepy.request({
-        url: `${constants.API_HOST}/api/articles/all/today?type=daily`
+        url: `${constants.API_HOST}/api/articles/all/today?type=ai`
       }).then((resp) => {
         if (resp.statusCode === 200) {
           that.articles = resp.data

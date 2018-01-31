@@ -2,9 +2,106 @@
 .article-detail-wpy {
   padding: 40rpx;
 }
+.referral-wrapper {
+  color: #222;
+  background: #f5f5f5;
+  padding: 20rpx;
+  font-size: 28rpx;
+  border-radius: 8rpx;
+  margin-bottom: 40rpx;
+  .referral-link {
+    display: block;
+    word-break: break-word;
+  }
+}
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #abb2bf;
+  background: #282c34;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #5c6370;
+  font-style: italic;
+}
+
+.hljs-doctag,
+.hljs-keyword,
+.hljs-formula {
+  color: #c678dd;
+}
+
+.hljs-section,
+.hljs-name,
+.hljs-selector-tag,
+.hljs-deletion,
+.hljs-subst {
+  color: #e06c75;
+}
+
+.hljs-literal {
+  color: #56b6c2;
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition,
+.hljs-attribute,
+.hljs-meta-string {
+  color: #98c379;
+}
+
+.hljs-built_in,
+.hljs-class .hljs-title {
+  color: #e6c07b;
+}
+
+.hljs-attr,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-type,
+.hljs-selector-class,
+.hljs-selector-attr,
+.hljs-selector-pseudo,
+.hljs-number {
+  color: #d19a66;
+}
+
+.hljs-symbol,
+.hljs-bullet,
+.hljs-link,
+.hljs-meta,
+.hljs-selector-id,
+.hljs-title {
+  color: #61aeee;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-link {
+  text-decoration: underline;
+}
+.image-caption {
+  color: #ccc;
+  text-align: center;
+  font-size: 20rpx;
+}
 </style>
 <template>
   <view class="article-detail-wpy">
+    <view class="referral-wrapper">
+      <text>原文地址:</text>
+      <text class="referral-link">{{link}}</text>
+    </view>
     <rich-text nodes="{{detail}}"></rich-text>
   </view>
 </template>
@@ -22,6 +119,7 @@
     data = {
       title: '',
       bg: '',
+      link: '',
       detail: ''
     }
 
@@ -50,6 +148,7 @@
         if (resp.statusCode === 200) {
           that.title = resp.data.title
           that.bg = resp.data.bgUrl
+          that.link = resp.data.contentUrl
           wepy.setNavigationBarTitle({
             title: resp.data.title
           })

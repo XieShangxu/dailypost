@@ -12,9 +12,9 @@ export default class extends wepy.app {
       'pages/article',
       'pages/articleList',
       'pages/articleDetail',
-      'pages/resource',
-      'pages/interview',
-      'pages/code'
+      'pages/greatfe',
+      'pages/ai',
+      'pages/personal'
     ],
     window: {
       backgroundTextStyle: 'light',

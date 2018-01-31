@@ -70,20 +70,20 @@ page {
     data = {
       navs: [{
         key: 'article',
-        name: '文章一篇',
+        name: '每日文章',
         imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/article.svg'
       }, {
-        key: 'resource',
-        name: '资源一筐',
+        key: 'greatfe',
+        name: '大前端',
         imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/resource.svg'
       }, {
-        key: 'code',
-        name: '代码一行',
-        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/code.svg'
-      }, {
-        key: 'interview',
-        name: '面试一打',
+        key: 'ai',
+        name: '人工智能',
         imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/interview.svg'
+      }, {
+        key: 'personal',
+        name: '趣人趣事',
+        imgUrl: 'http://p0shtcy89.bkt.clouddn.com/svg/code.svg'
       }]
     }
 

@@ -8,14 +8,17 @@
 .section-header {
   display: block;
   margin-bottom: 20rpx;
+  font-size: 28rpx;
+  color: #CCC;
 }
 .list-item {
   margin-bottom: 20rpx;
-  padding: 20rpx;
+  padding: 40rpx 30rpx;
   border: 1rpx solid #e5e5e5;
   border-radius: 10rpx;
   background: #f5f5f5;
   font-size: 32rpx;
+  box-shadow: 2rpx 2rpx 10rpx rgba(0,0,0,.1);
 }
 </style>
 <template>
@@ -24,7 +27,7 @@
       <view class="section-wrapper">
         <text class="section-header">{{key}}</text>
         <repeat for="{{item}}" key="index" index="index" item="article">
-          <view class="list-item" style="border-left: 10rpx solid {{colorArr[index % 6]}}" data-id="{{article.uid}}" @tap="gotoDetail">
+          <view class="list-item" data-id="{{article.uid}}" @tap="gotoDetail">
             {{article.title}}
           </view>
         </repeat>
@@ -43,7 +46,6 @@
     }
 
     data = {
-      colorArr: ['#A5CEDB', '#FAE674', '#D6563E', '#BE8198', '#CBDA65', '#6A645D'],
       articles: []
     }
 
@@ -51,6 +53,9 @@
     }
 
     methods = {
+      formatDate(str) {
+        return `${str.substr(0, 4)}-${str.substr(4, 2)}-${str.substr(6, 2)}`; 
+      },
       gotoDetail(e) {
         const id = e.currentTarget.dataset.id
         wepy.navigateTo({
@@ -62,19 +67,21 @@
     events = {
     }
 
-    onLoad() {
+    onLoad(options) {
       const that = this
+      const type = options.type
       wepy.request({
-        url: `${constants.API_HOST}/api/articles`
+        url: `${constants.API_HOST}/api/articles?type=${type}`
       }).then((resp) => {
         if (resp.statusCode === 200) {
           const data = resp.data
           const formattedData = {}
           for (const article of data) {
-            if (!formattedData[`${article.date} `]) {
-              formattedData[`${article.date} `] = []
+            const d = that.methods.formatDate(article.date);
+            if (!formattedData[d]) {
+              formattedData[d] = []
             }
-            formattedData[`${article.date} `].push(article)
+            formattedData[d].push(article)
           }
           that.articles = formattedData
           that.$apply()
