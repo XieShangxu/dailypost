@@ -6,7 +6,7 @@
 </style>
 <template>
   <view class="personal-wpy">
-    敬请期待
+    将于八月上线，敬请期待
     <image src="http://p0shtcy89.bkt.clouddn.com/hourglass_loader.gif" />
   </view>
 </template>
@@ -16,7 +16,7 @@
 
   export default class Personal extends wepy.page {
     config = {
-      navigationBarTitleText: '趣人趣事'
+      navigationBarTitleText: '前端杂谈'
     }
 
     data = {

@@ -54,7 +54,7 @@
 
     methods = {
       formatDate(str) {
-        return `${str.substr(0, 4)}-${str.substr(4, 2)}-${str.substr(6, 2)}`; 
+        return `${str.substr(0, 4)}-${str.substr(4, 2)}-${str.substr(6, 2)}`
       },
       gotoDetail(e) {
         const id = e.currentTarget.dataset.id
@@ -77,7 +77,7 @@
           const data = resp.data
           const formattedData = {}
           for (const article of data) {
-            const d = that.methods.formatDate(article.date);
+            const d = that.methods.formatDate(article.date)
             if (!formattedData[d]) {
               formattedData[d] = []
             }

@@ -81,12 +81,19 @@ page {
   import wepy from 'wepy'
   import constants from '../utils/constants.js'
 
+  const titleMapping = {
+    daily: '文章',
+    greatfe: '大前端',
+    ai: '人工智能'
+  }
+
   export default class Article extends wepy.page {
     config = {
-      navigationBarTitleText: '文章'
+      navigationBarTitleText: '前端日日谈'
     }
 
     data = {
+      type: 'daily',
       indicatorDots: true,
       circular: true,
       articles: []
@@ -103,8 +110,9 @@ page {
         })
       },
       showHistory() {
+        const that = this
         wepy.navigateTo({
-          url: 'articleList?type=daily'
+          url: `articleList?type=${that.type}`
         })
       }
     }
@@ -112,10 +120,14 @@ page {
     events = {
     }
 
-    onLoad() {
+    onLoad(options) {
       const that = this
+      this.type = options.type
+      wepy.setNavigationBarTitle({
+        title: titleMapping[options.type]
+      })
       wepy.request({
-        url: `${constants.API_HOST}/api/articles/all/today?type=daily`
+        url: `${constants.API_HOST}/api/articles/all/today?type=${options.type}`
       }).then((resp) => {
         if (resp.statusCode === 200) {
           that.articles = resp.data

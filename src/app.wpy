@@ -12,8 +12,6 @@ export default class extends wepy.app {
       'pages/article',
       'pages/articleList',
       'pages/articleDetail',
-      'pages/greatfe',
-      'pages/ai',
       'pages/personal'
     ],
     window: {
